@@ -4,15 +4,15 @@ services:
     env: python
     plan: free
     buildCommand: |
-      cd frontend && npm install && npm run build
+      cd ../frontend && npm install && npm run build
       cd ../backend
-    startCommand: gunicorn main:app
+    startCommand: gunicorn src.main:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
     buildFilter:
       paths:
-        - frontend/
-        - backend/
+        - ../frontend/
+        - ./
     autoDeploy: true
-    rootDir: backend
+    rootDir: .
