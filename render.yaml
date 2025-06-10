@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: sistema-de-vendas
+    env: python
+    plan: free
+    buildCommand: |
+      cd frontend && npm install && npm run build
+      cd ../backend
+    startCommand: gunicorn main:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+    buildFilter:
+      paths:
+        - frontend/
+        - backend/
+    autoDeploy: true
+    rootDir: backend
